@@ -1,6 +1,5 @@
 package offer.validator;
 
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,12 +28,12 @@ public class StartDateValidatorImplTest {
     }
 
     @Test
-    public void validWhen_offerIsNull() {
+    public void shouldBeValidWhenOfferIsNull() {
         assertTrue(startDateValidator.isValid(null, constraintValidatorContext));
     }
 
     @Test
-    public void validWhen_dateIsInFutureAndIsoFormat() {
+    public void shouldBeValidWhenDateIsInFutureAndIsoFormat() {
         LocalDate localDate = LocalDate.now().plusMonths(3);
         String date = DateTimeFormatter.ISO_DATE.format(localDate);
         assertTrue(startDateValidator.isValid(date, constraintValidatorContext));
@@ -42,14 +41,14 @@ public class StartDateValidatorImplTest {
     }
 
     @Test
-    public void invalidWhen_dateIsInFutureAndNotIsoFormat() {
+    public void shouldBeInvalidWhenDateIsInFutureAndNotIsoFormat() {
         LocalDate localDate = LocalDate.now().plusDays(3);
         String date = DateTimeFormatter.ofPattern("MMM d yyyy").format(localDate);
         assertFalse(startDateValidator.isValid(date, constraintValidatorContext));
     }
 
     @Test
-    public void invalidWhen_dateIsInPastAndIsoFormat() {
+    public void shouldBeInvalidWhenDateIsInPastAndIsoFormat() {
         LocalDate localDate = LocalDate.now().minusDays(3);
         String date = DateTimeFormatter.ISO_DATE.format(localDate);
 
@@ -60,7 +59,7 @@ public class StartDateValidatorImplTest {
     }
 
     @Test
-    public void invalidWhenParsingAnInvalidString() {
+    public void shouldBeInvalidWhenParsingAnInvalidString() {
         assertFalse(startDateValidator.isValid("invalid", constraintValidatorContext));
     }
 }

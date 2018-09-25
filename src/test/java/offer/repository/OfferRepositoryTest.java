@@ -73,7 +73,7 @@ public class OfferRepositoryTest {
     }
 
     @Test
-    public void getOffer_failWhenOfferIsExpired() throws OfferNotFound, OfferExpiredException {
+    public void getOffer_shouldFailWhenOfferIsExpired() throws OfferNotFound, OfferExpiredException {
         Offer offer = TestUtils.createOffer(OFFER1_KEY);
         offer.setCancelled(true);
         offerRepository.addOffer(offer);
@@ -86,7 +86,7 @@ public class OfferRepositoryTest {
 
 
     @Test
-    public void getOffer_failWhenOfferJustExpired() throws OfferNotFound, OfferExpiredException {
+    public void getOffer_shouldFailWhenOfferJustExpired() throws OfferNotFound, OfferExpiredException {
         when(offerExpirationValidator.isExpired(offer)).thenReturn(true);
 
         expectedEx.expect(OfferExpiredException.class);
@@ -99,7 +99,7 @@ public class OfferRepositoryTest {
 
 
     @Test
-    public void getOffer_failWhenOfferNotFound() throws OfferNotFound, OfferExpiredException {
+    public void getOffer_shouldFailWhenOfferNotFound() throws OfferNotFound, OfferExpiredException {
 
         expectedEx.expect(OfferNotFound.class);
         expectedEx.expectMessage("Offer does not exist");
@@ -114,7 +114,7 @@ public class OfferRepositoryTest {
     }
 
     @Test
-    public void cancelOffer_failureWhenOfferNotFound() throws OfferNotFound {
+    public void cancelOffer_shouldFailWhenOfferNotFound() throws OfferNotFound {
         expectedEx.expect(OfferNotFound.class);
         expectedEx.expectMessage("Cannot cancel an offer which does not exist");
 

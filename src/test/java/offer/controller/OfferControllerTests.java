@@ -135,7 +135,7 @@ public class OfferControllerTests {
     }
 
     @Test
-    public void retrieveOffer_failWhenOfferIsExpired() throws Exception {
+    public void retrieveOffer_shouldFailWhenOfferIsExpired() throws Exception {
         Offer offer = TestUtils.createOffer("offer1");
         offer.setCancelled(true);
         postOffer(offer);
@@ -154,7 +154,7 @@ public class OfferControllerTests {
     }
 
     @Test
-    public void retrieveOffer_failWhenOfferJustExpired() throws Exception {
+    public void retrieveOffer_shouldFailWhenOfferJustExpired() throws Exception {
         Offer offer = TestUtils.createOffer("offer1");
         offer.setStartDate(null);
         offer.setValidityTime(-1);
@@ -203,7 +203,7 @@ public class OfferControllerTests {
     }
 
     @Test
-    public void cancelOffer_failWhenOfferDoesNotExist() throws Exception {
+    public void cancelOffer_shouldFailWhenOfferDoesNotExist() throws Exception {
 
         String badResponse = this.mockMvc.perform(put("/cancel/offer2")
                 .contentType(MediaType.APPLICATION_JSON))
