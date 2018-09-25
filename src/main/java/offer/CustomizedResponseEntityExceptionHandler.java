@@ -43,7 +43,7 @@ public class CustomizedResponseEntityExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Object> handleNotFoundErrors(OfferNotFound ex) {
         ErrorDetails errorDetails = new ErrorDetails("OFFER_NOT_FOUND", Collections.singletonList(ex.getMessage()));
-        return new ResponseEntity(errorDetails, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity(errorDetails, HttpStatus.NOT_FOUND);
     }
 
 }

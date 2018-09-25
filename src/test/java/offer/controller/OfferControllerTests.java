@@ -177,7 +177,7 @@ public class OfferControllerTests {
     public void retrieveOffer_notFound() throws Exception {
         String badResponse = this.mockMvc.perform(get("/retrieve/offer2")
                 .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print()).andExpect(status().isBadRequest())
+                .andDo(print()).andExpect(status().isNotFound())
                 .andReturn().getResponse().getContentAsString();
 
         ErrorDetails errorDetails = objectMapper.readValue(badResponse, ErrorDetails.class);
@@ -207,7 +207,7 @@ public class OfferControllerTests {
 
         String badResponse = this.mockMvc.perform(put("/cancel/offer2")
                 .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print()).andExpect(status().isBadRequest())
+                .andDo(print()).andExpect(status().isNotFound())
                 .andReturn().getResponse().getContentAsString();
 
         ErrorDetails errorDetails = objectMapper.readValue(badResponse, ErrorDetails.class);
