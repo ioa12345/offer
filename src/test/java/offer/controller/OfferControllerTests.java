@@ -17,7 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import javax.validation.Validator;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -76,7 +76,7 @@ public class OfferControllerTests {
         offer.setId("offer1");
         offer.setCancelled(false);
         offer.setDescription("Offer 1 description");
-        offer.setStartDate(LocalDateTime.now().plusMonths(3).format(DateTimeFormatter.ISO_DATE_TIME));
+        offer.setStartDate(LocalDate.now().plusMonths(3).format(DateTimeFormatter.ISO_DATE));
         offer.setValidityTime(1000000);
         offer.setPrice(new Price());
 
@@ -100,7 +100,7 @@ public class OfferControllerTests {
         offer.setId("offer1");
         offer.setCancelled(false);
         offer.setDescription("Offer 1 description");
-        offer.setStartDate(LocalDateTime.now().minusMonths(3).format(DateTimeFormatter.ISO_DATE_TIME));
+        offer.setStartDate(LocalDate.now().minusMonths(3).format(DateTimeFormatter.ISO_DATE));
         offer.setValidityTime(1000000);
         Price price = new Price();
         price.setAmount(new BigDecimal(10));

@@ -3,7 +3,7 @@ package offer.validator;
 import offer.model.Offer;
 import org.junit.Test;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import static org.junit.Assert.assertFalse;
@@ -16,7 +16,7 @@ public class OfferExpirationValidatorTest {
     @Test
     public void isExpired_WhenStartDatePlusValidityTimeIsBeforeToday() {
         Offer offer = new Offer();
-        offer.setStartDate(DateTimeFormatter.ISO_DATE_TIME.format(LocalDateTime.now().minusMonths(3)));
+        offer.setStartDate(DateTimeFormatter.ISO_DATE.format(LocalDate.now().minusMonths(3)));
         offer.setValidityTime(2);
 
         assertTrue(offerExpirationValidator.isExpired(offer));
@@ -25,7 +25,7 @@ public class OfferExpirationValidatorTest {
     @Test
     public void isNotExpired_WhenStartDatePlusValidityTimeIsAfterToday() {
         Offer offer = new Offer();
-        offer.setStartDate(DateTimeFormatter.ISO_DATE_TIME.format(LocalDateTime.now().minusMonths(3)));
+        offer.setStartDate(DateTimeFormatter.ISO_DATE.format(LocalDate.now().minusMonths(3)));
         offer.setValidityTime(200);
 
         assertFalse(offerExpirationValidator.isExpired(offer));

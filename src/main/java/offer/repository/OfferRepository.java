@@ -8,7 +8,7 @@ import offer.validator.OfferExpirationValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +28,7 @@ public class OfferRepository {
     }
 
     public void addOffer(Offer offer) {
-        String startDate = Optional.ofNullable(offer.getStartDate()).orElse(DateTimeFormatter.ISO_DATE_TIME.format(LocalDateTime.now()));
+        String startDate = Optional.ofNullable(offer.getStartDate()).orElse(DateTimeFormatter.ISO_DATE.format(LocalDate.now()));
         offer.setStartDate(startDate);
         offerMap.put(offer.getId(), offer);
     }

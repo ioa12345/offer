@@ -2,7 +2,7 @@ package offer.validator;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 
@@ -20,8 +20,8 @@ public class StartDateValidatorImpl implements ConstraintValidator<StartDateVali
         }
 
         try {
-            LocalDateTime localDateTime = LocalDateTime.parse(dateText, DateTimeFormatter.ISO_DATE_TIME);
-            if (localDateTime.isBefore(LocalDateTime.now())) {
+            LocalDate localDate = LocalDate.parse(dateText, DateTimeFormatter.ISO_DATE);
+            if (localDate.isBefore(LocalDate.now())) {
                 constraintValidatorContext.disableDefaultConstraintViolation();
                 constraintValidatorContext.buildConstraintViolationWithTemplate(
                         "cannot be in the past"

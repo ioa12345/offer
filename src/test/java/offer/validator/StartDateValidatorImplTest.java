@@ -8,7 +8,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.validation.ConstraintValidatorContext;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import static org.junit.Assert.assertFalse;
@@ -35,23 +35,23 @@ public class StartDateValidatorImplTest {
 
     @Test
     public void validWhen_dateIsInFutureAndIsoFormat() {
-        LocalDateTime localDateTime = LocalDateTime.now().plusMonths(3);
-        String date = DateTimeFormatter.ISO_DATE_TIME.format(localDateTime);
+        LocalDate localDate = LocalDate.now().plusMonths(3);
+        String date = DateTimeFormatter.ISO_DATE.format(localDate);
         assertTrue(startDateValidator.isValid(date, constraintValidatorContext));
 
     }
 
     @Test
     public void invalidWhen_dateIsInFutureAndNotIsoFormat() {
-        LocalDateTime localDateTime = LocalDateTime.now().plusMonths(3);
-        String date = DateTimeFormatter.ofPattern("mm-dd-yy").format(localDateTime);
+        LocalDate localDate = LocalDate.now().plusDays(3);
+        String date = DateTimeFormatter.ofPattern("MMM d yyyy").format(localDate);
         assertFalse(startDateValidator.isValid(date, constraintValidatorContext));
     }
 
     @Test
     public void invalidWhen_dateIsInPastAndIsoFormat() {
-        LocalDateTime localDateTime = LocalDateTime.now().minusMinutes(3);
-        String date = DateTimeFormatter.ISO_DATE_TIME.format(localDateTime);
+        LocalDate localDate = LocalDate.now().minusDays(3);
+        String date = DateTimeFormatter.ISO_DATE.format(localDate);
 
         assertFalse(startDateValidator.isValid(date, constraintValidatorContext));
         verify(constraintValidatorContext).buildConstraintViolationWithTemplate(

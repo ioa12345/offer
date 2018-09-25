@@ -4,7 +4,7 @@ import offer.model.Offer;
 import offer.model.Price;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class TestUtils {
@@ -15,7 +15,7 @@ public class TestUtils {
         offer.setId(id);
         offer.setCancelled(false);
         offer.setDescription("Offer 1 description");
-        offer.setStartDate(DateTimeFormatter.ISO_DATE_TIME.format(LocalDateTime.now().plusMonths(3)));
+        offer.setStartDate(DateTimeFormatter.ISO_DATE.format(LocalDate.now().plusMonths(3)));
         offer.setValidityTime(1000000);
         Price price = new Price();
         price.setAmount(new BigDecimal(100));

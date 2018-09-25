@@ -7,7 +7,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,7 +35,7 @@ public class OfferTest {
         offer.setId("offer1");
         offer.setCancelled(false);
         offer.setDescription("Offer 1 description");
-        offer.setStartDate(DateTimeFormatter.ISO_DATE_TIME.format(LocalDateTime.now().plusMonths(3)));
+        offer.setStartDate(DateTimeFormatter.ISO_DATE.format(LocalDate.now().plusMonths(3)));
         offer.setValidityTime(1000000);
         Price price = new Price();
         price.setAmount(new BigDecimal(100));
@@ -70,7 +70,7 @@ public class OfferTest {
         offer.setId("offer1");
         offer.setCancelled(false);
         offer.setDescription("Offer 1 description");
-        offer.setStartDate(DateTimeFormatter.ISO_DATE_TIME.format(LocalDateTime.now().minusMonths(3)));
+        offer.setStartDate(DateTimeFormatter.ISO_DATE.format(LocalDate.now().minusMonths(3)));
         offer.setValidityTime(1000000);
         Price price = new Price();
         price.setAmount(new BigDecimal(100));
