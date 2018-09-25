@@ -2,7 +2,7 @@ package offer.repository;
 
 
 import offer.exception.OfferExpiredException;
-import offer.exception.OfferNotFound;
+import offer.exception.OfferNotFoundException;
 import offer.model.Offer;
 import offer.validator.OfferExpirationValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class OfferRepository {
         offerMap.put(offer.getId(), offer);
     }
 
-    public Offer getOffer(String id) throws OfferExpiredException, OfferNotFound {
+    public Offer getOffer(String id) throws OfferExpiredException, OfferNotFoundException {
         if (offerMap.containsKey(id)) {
 
             Offer offer = offerMap.get(id);
@@ -45,17 +45,17 @@ public class OfferRepository {
             }
             return offer;
         } else {
-            throw new OfferNotFound("Offer does not exist");
+            throw new OfferNotFoundException("Offer does not exist");
         }
 
     }
 
-    public boolean cancellOffer(String id) throws OfferNotFound {
+    public boolean cancellOffer(String id) throws OfferNotFoundException {
         if (offerMap.containsKey(id)) {
             cancelExistingOffer(id);
             return true;
         }
-        throw new OfferNotFound("Cannot cancel an offer which does not exist");
+        throw new OfferNotFoundException("Cannot cancel an offer which does not exist");
     }
 
     private void cancelExistingOffer(String id) {

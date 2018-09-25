@@ -1,7 +1,7 @@
 package offer;
 
 import offer.exception.OfferExpiredException;
-import offer.exception.OfferNotFound;
+import offer.exception.OfferNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -39,9 +39,9 @@ public class CustomizedResponseEntityExceptionHandler {
         return new ResponseEntity(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler({OfferNotFound.class})
+    @ExceptionHandler({OfferNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<Object> handleNotFoundErrors(OfferNotFound ex) {
+    public ResponseEntity<Object> handleNotFoundErrors(OfferNotFoundException ex) {
         ErrorDetails errorDetails = new ErrorDetails("OFFER_NOT_FOUND", Collections.singletonList(ex.getMessage()));
         return new ResponseEntity(errorDetails, HttpStatus.NOT_FOUND);
     }

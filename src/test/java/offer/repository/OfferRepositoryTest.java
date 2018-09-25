@@ -1,7 +1,7 @@
 package offer.repository;
 
 import offer.exception.OfferExpiredException;
-import offer.exception.OfferNotFound;
+import offer.exception.OfferNotFoundException;
 import offer.model.Offer;
 import offer.utils.TestUtils;
 import offer.validator.OfferExpirationValidator;
@@ -67,13 +67,13 @@ public class OfferRepositoryTest {
     }
 
     @Test
-    public void getOffer_success() throws OfferNotFound, OfferExpiredException {
+    public void getOffer_success() throws OfferNotFoundException, OfferExpiredException {
         Offer actualOffer = offerRepository.getOffer(OFFER1_KEY);
         assertThat(actualOffer, is(offer));
     }
 
     @Test
-    public void getOffer_shouldFailWhenOfferIsExpired() throws OfferNotFound, OfferExpiredException {
+    public void getOffer_shouldFailWhenOfferIsExpired() throws OfferNotFoundException, OfferExpiredException {
         Offer offer = TestUtils.createOffer(OFFER1_KEY);
         offer.setCancelled(true);
         offerRepository.addOffer(offer);
@@ -86,7 +86,7 @@ public class OfferRepositoryTest {
 
 
     @Test
-    public void getOffer_shouldFailWhenOfferJustExpired() throws OfferNotFound, OfferExpiredException {
+    public void getOffer_shouldFailWhenOfferJustExpired() throws OfferNotFoundException, OfferExpiredException {
         when(offerExpirationValidator.isExpired(offer)).thenReturn(true);
 
         expectedEx.expect(OfferExpiredException.class);
@@ -99,23 +99,23 @@ public class OfferRepositoryTest {
 
 
     @Test
-    public void getOffer_shouldFailWhenOfferNotFound() throws OfferNotFound, OfferExpiredException {
+    public void getOffer_shouldFailWhenOfferNotFound() throws OfferNotFoundException, OfferExpiredException {
 
-        expectedEx.expect(OfferNotFound.class);
+        expectedEx.expect(OfferNotFoundException.class);
         expectedEx.expectMessage("Offer does not exist");
 
         offerRepository.getOffer(OFFER2_KEY);
     }
 
     @Test
-    public void cancelOffer_success() throws OfferNotFound {
+    public void cancelOffer_success() throws OfferNotFoundException {
         assertTrue(offerRepository.cancellOffer(OFFER1_KEY));
         assertTrue(OfferRepository.getAllOffers().get(OFFER1_KEY).getCancelled());
     }
 
     @Test
-    public void cancelOffer_shouldFailWhenOfferNotFound() throws OfferNotFound {
-        expectedEx.expect(OfferNotFound.class);
+    public void cancelOffer_shouldFailWhenOfferNotFound() throws OfferNotFoundException {
+        expectedEx.expect(OfferNotFoundException.class);
         expectedEx.expectMessage("Cannot cancel an offer which does not exist");
 
         offerRepository.cancellOffer(OFFER2_KEY);

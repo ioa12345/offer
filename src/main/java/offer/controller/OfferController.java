@@ -2,7 +2,7 @@ package offer.controller;
 
 
 import offer.exception.OfferExpiredException;
-import offer.exception.OfferNotFound;
+import offer.exception.OfferNotFoundException;
 import offer.model.Offer;
 import offer.repository.OfferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +28,13 @@ public class OfferController {
 
     @GetMapping(value = "/retrieve/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Offer retrieveOffer(@PathVariable(value = "id") String id) throws OfferNotFound, OfferExpiredException {
+    public Offer retrieveOffer(@PathVariable(value = "id") String id) throws OfferNotFoundException, OfferExpiredException {
         return offerRepository.getOffer(id);
     }
 
     @PutMapping(value = "/cancel/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<String> cancelOffer(@PathVariable(value = "id") String id) throws OfferNotFound {
+    public ResponseEntity<String> cancelOffer(@PathVariable(value = "id") String id) throws OfferNotFoundException {
         boolean isCancelled = offerRepository.cancellOffer(id);
         if (isCancelled) {
             return ResponseEntity.ok("Succesfully Cancelled");
