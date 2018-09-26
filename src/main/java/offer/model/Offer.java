@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 
 public class Offer {
 
+    @NotNull
     private String id;
 
     @NotNull

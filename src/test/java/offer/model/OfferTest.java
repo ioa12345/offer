@@ -57,8 +57,9 @@ public class OfferTest {
                 .map(constraint -> constraint.getPropertyPath() + " " + constraint.getMessage())
                 .collect(Collectors.toList());
 
-        assertThat(validationMessage.size(), is(3));
+        assertThat(validationMessage.size(), is(4));
         assertThat(validationMessage, hasItem("price must not be null"));
+        assertThat(validationMessage, hasItem("id must not be null"));
         assertThat(validationMessage, hasItem("validityTime must not be null"));
         assertThat(validationMessage, hasItem("description must not be null"));
 
