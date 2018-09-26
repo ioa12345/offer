@@ -14,7 +14,7 @@ public class OfferExpirationValidatorTest {
     OfferExpirationValidator offerExpirationValidator = new OfferExpirationValidator();
 
     @Test
-    public void isExpired_whenStartDatePlusValidityTimeIsBeforeToday() {
+    public void shouldExpireWhenStartDatePlusValidityTimeIsBeforeToday() {
         Offer offer = new Offer();
         offer.setStartDate(DateTimeFormatter.ISO_DATE.format(LocalDate.now().minusMonths(3)));
         offer.setValidityTime(2);
@@ -23,7 +23,7 @@ public class OfferExpirationValidatorTest {
     }
 
     @Test
-    public void isNotExpired_whenStartDatePlusValidityTimeIsAfterToday() {
+    public void shouldNotExpireWhenStartDatePlusValidityTimeIsAfterToday() {
         Offer offer = new Offer();
         offer.setStartDate(DateTimeFormatter.ISO_DATE.format(LocalDate.now().minusMonths(3)));
         offer.setValidityTime(200);
